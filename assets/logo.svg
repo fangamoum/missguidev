@@ -1,0 +1,24 @@
+<svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Emblème MISSGUI DEV">
+  <defs>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4d998"/>
+      <stop offset="45%" stop-color="#c9a24b"/>
+      <stop offset="100%" stop-color="#8a6a24"/>
+    </linearGradient>
+  </defs>
+  <circle cx="60" cy="64" r="42" fill="none" stroke="url(#goldGrad)" stroke-width="2"/>
+  <path d="M60 12 L64 22 L74 18 L69 28 L79 30 L70 36 L76 45 L65 42 L64 53 L58 44 L50 51 L51 40 L40 41 L48 33 L41 26 L52 27 Z"
+        fill="url(#goldGrad)" opacity="0" />
+  <!-- crown -->
+  <path d="M44 30 L49 40 L54 28 L60 40 L66 28 L71 40 L76 30 L73 46 L47 46 Z"
+        fill="url(#goldGrad)"/>
+  <circle cx="44" cy="28" r="2.4" fill="url(#goldGrad)"/>
+  <circle cx="60" cy="26" r="2.6" fill="url(#goldGrad)"/>
+  <circle cx="76" cy="28" r="2.4" fill="url(#goldGrad)"/>
+  <!-- gown silhouette -->
+  <path d="M60 47 C55 47 51 51 51 56 C51 60 53 62 51 66 L44 100 C43 104 46 107 50 107 L70 107
+           C74 107 77 104 76 100 L69 66 C67 62 69 60 69 56 C69 51 65 47 60 47 Z"
+        fill="url(#goldGrad)"/>
+  <path d="M60 47 C57.5 47 55.5 49.3 55.5 52 C55.5 54.7 57.5 57 60 57 C62.5 57 64.5 54.7 64.5 52 C64.5 49.3 62.5 47 60 47 Z"
+        fill="#0d0b0a"/>
+</svg>
