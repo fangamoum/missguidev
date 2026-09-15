@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="description" content="MISSGUI DEV — Agence de formation et d'accompagnement des jeunes femmes guinéennes." />
   <title>MISSGUI DEV — Miss Guinée en Devenir</title>
@@ -285,6 +285,20 @@
             </label>
             <label>Âge
               <input type="number" name="age" min="16" max="45" placeholder="Votre âge" required />
+            </label>
+            <label>Niveau d'étude
+              <select name="niveau_etude" required>
+                <option value="" disabled selected>-- Sélectionnez --</option>
+                <option value="Lycée">Lycée</option>
+                <option value="Baccalauréat">Baccalauréat</option>
+                <option value="Université (Licence)">Université (Licence)</option>
+                <option value="Université (Master)">Université (Master)</option>
+                <option value="Doctorat">Doctorat</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label>Taille (cm)
+              <input type="number" name="taille" min="140" max="220" placeholder="Ex: 170" required />
             </label>
           </div>
           <label>Pourquoi souhaitez-vous rejoindre MISSGUI DEV ?
