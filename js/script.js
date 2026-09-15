@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---- EMAILJS ----
   emailjs.init({
-    publicKey: "AVxrjMkQ8hN1-qkIS"
+    publicKey: "kTMIDQ17vDXlhv2FE"
   });
 
   // ---- ÉLÉMENTS ----
@@ -98,75 +98,90 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ---- FORMULAIRE ----
-  if (form) {
-    form.addEventListener("submit", (e) => {
-      e.preventDefault();
+if (form) {
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        if (formMessage) {
-          formMessage.textContent = "Veuillez compléter correctement tous les champs.";
-          formMessage.style.color = "#d98d7d";
-        }
-        return;
-      }
-
-      const data = new FormData(form);
-      const prenom = data.get("prenom");
-      const nom = data.get("nom");
-      const email = data.get("email");
-      const telephone = data.get("telephone");
-      const ville = data.get("ville");
-      const age = Number(data.get("age"));
-      const niveauEtude = data.get("niveau_etude");
-      const taille = Number(data.get("taille"));
-      const motivation = data.get("motivation");
-
-      if (age < 16 || age > 45) {
-        if (formMessage) {
-          formMessage.textContent = "Veuillez vérifier l'âge renseigné (16-45 ans).";
-          formMessage.style.color = "#d98d7d";
-        }
-        return;
-      }
-
-      if (taille < 140 || taille > 220) {
-        if (formMessage) {
-          formMessage.textContent = "Veuillez vérifier la taille renseignée (140-220 cm).";
-          formMessage.style.color = "#d98d7d";
-        }
-        return;
-      }
-
-      if (!niveauEtude) {
-        if (formMessage) {
-          formMessage.textContent = "Veuillez sélectionner votre niveau d'étude.";
-          formMessage.style.color = "#d98d7d";
-        }
-        return;
-      }
-
-      if (!motivation || motivation.trim().length < 10) {
-        if (formMessage) {
-          formMessage.textContent = "Veuillez renseigner votre motivation.";
-          formMessage.style.color = "#d98d7d";
-        }
-        return;
-      }
-
-      console.log("Candidature :", {
-        prenom, nom, email, telephone, ville, age,
-        niveauEtude, taille, motivation
-      });
-
+    // Vérification HTML5 native
+    if (!form.checkValidity()) {
+      form.reportValidity();
       if (formMessage) {
-        formMessage.textContent = `Merci ${prenom} ! Votre candidature a bien été enregistrée.`;
-        formMessage.style.color = "var(--gold)";
+        formMessage.textContent = "Veuillez compléter correctement tous les champs.";
+        formMessage.style.color = "#d98d7d";
       }
-      showToast("Votre candidature a été enregistrée.");
+      return;
+    }
+
+    // Récupération des données
+    const data = new FormData(form);
+    const prenom = data.get("prenom");
+    const nom = data.get("nom");
+    const email = data.get("email");
+    const telephone = data.get("telephone");
+    const ville = data.get("ville");
+    const age = Number(data.get("age"));
+    const niveauEtude = data.get("niveau_etude");
+    const taille = Number(data.get("taille"));
+    const motivation = data.get("motivation");
+
+    // Validations personnalisées
+    if (age < 16 || age > 45) {
+      formMessage.textContent = "Veuillez vérifier l'âge (16-45 ans).";
+      formMessage.style.color = "#d98d7d";
+      return;
+    }
+    if (taille < 140 || taille > 220) {
+      formMessage.textContent = "Veuillez vérifier la taille (140-220 cm).";
+      formMessage.style.color = "#d98d7d";
+      return;
+    }
+    if (!niveauEtude) {
+      formMessage.textContent = "Veuillez sélectionner votre niveau d'étude.";
+      formMessage.style.color = "#d98d7d";
+      return;
+    }
+    if (!motivation || motivation.trim().length < 10) {
+      formMessage.textContent = "Veuillez renseigner votre motivation (10 caractères min).";
+      formMessage.style.color = "#d98d7d";
+      return;
+    }
+
+    // Désactivation du bouton pendant l'envoi
+    const submitBtn = form.querySelector(".form-submit");
+    const originalText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = "Envoi en cours...";
+
+    formMessage.textContent = "";
+    formMessage.style.color = "var(--gold)";
+
+    try {
+      const response = await emailjs.sendForm(
+        "service_a9tonx8",
+        "template_yfr1ma4",
+        form
+      );
+
+      console.log("✅ Email envoyé :", response.status, response.text);
+
+      formMessage.textContent = `Merci ${prenom} ! Votre candidature a bien été enregistrée.`;
+      formMessage.style.color = "var(--gold)";
+      showToast("✅ Candidature envoyée avec succès !");
       form.reset();
-    });
-  }
+
+    } catch (error) {
+      console.error("❌ Erreur EmailJS :", error);
+
+      formMessage.textContent = "Erreur lors de l'envoi. Vérifiez votre connexion et réessayez.";
+      formMessage.style.color = "#d98d7d";
+      showToast("❌ Échec de l'envoi. Réessayez.");
+    } finally {
+      // Réactivation du bouton
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalText;
+    }
+  });
+}
 
   // ---- MODALS ----
   (function() {
