@@ -548,7 +548,7 @@ h1 span {
 .candidate-photo img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: 98%;
   transition: transform 0.7s;
 }
 .candidate-card:hover .candidate-photo img {
