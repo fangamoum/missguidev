@@ -1072,8 +1072,8 @@ h1 span {
 }
 .modal-candidate-item img {
   width: 100%;
-  height: 240px;
-  object-fit: cover;
+  height: 230px;
+  object-fit: 98%;
 }
 .modal-candidate-info {
   padding: 14px 12px;
